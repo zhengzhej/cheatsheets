@@ -56,6 +56,23 @@ isnull(expression) # return 0 or 1
 ifnull(value, function)
 ```
 
+### Window Function
+
+**rank/dense_rank/row() over(partition by ex order by ex) as ...**
+
+**sum/max/avg() over(partition by ex order by ex) as ...**
+
+[case](https://leetcode-cn.com/problems/calculate-salaries/solution/xiao-bai-si-lu-zhi-jie-qiu-chu-lai-jiu-x-0xlg/)
+```mysql
+select
+    case 
+        when max(salary)over(partition by company_id)>10000 then salary*0.51
+        when max(salary)over(partition by company_id) between 1000 and 10000 then salary*0.76
+        else salary 
+     end as salary
+from  Salaries
+```
+
 ## Cases
 **[sum() / case when / if](https://leetcode-cn.com/problems/capital-gainloss/)**
 ```mysql
@@ -73,3 +90,4 @@ select
 from Stocks 
 group by stock_name
 ```
+
