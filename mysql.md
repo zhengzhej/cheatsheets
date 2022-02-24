@@ -5,7 +5,7 @@
 select *
 from TABLE
 where expression
-order by column, field(column, name, name, name) desc
+order by column, field(column, name, name, name) desc # 'name' for string
 ```
 
 ### [Count()](https://www.cnblogs.com/zhuchenglin/p/12077989.html)
