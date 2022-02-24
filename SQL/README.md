@@ -33,12 +33,14 @@ ORDER BY c.customer_id
 now() # 2022-02-13 13:34:35
 date(now()) # 2022-02-13
 date_format(now(), '%y-%m-%d') # 22-02-13
-datediff('2020-02-02','2010-04-04') # a - b
+datediff('2020-04-02','2010-04-04') # a - b, return -1
+timediff('2020-05-05 10:10:10','2020-05-05 10:10:00') # return 00:00:10
 
 day('2020-05-05') # 05
 month('2020-05-05') # 05
 quarter('2020-05-05') # 4
 year('2020-05-05') # 2020
+time_to_sec('00:00:35') # 35
 
 weekday('2020-05-05') # 5 
 week('2020-05-05') # 25 start from first monday of the given year
@@ -47,6 +49,12 @@ weekofyear('2020-05-05') # 25
 date_add('2020-05-05', interval 1 day/week/month/year)
 date_sub('2020-05-05', interval 1 day/week/month/year)
 ```
+case
+```mysql
+# calculate time difference in second
+time_to_sec(timediff('2020-05-05 10:10:10','2020-05-05 10:10:00')) # return 10
+```
+
 ### Union
 ```mysql
 select c from table1
@@ -67,6 +75,8 @@ ifnull(value, function)
 ### Window Function
 
 **rank/dense_rank/row() over(partition by ex order by ex) as ...**
+
+**lead/lag(ex, n) over(partition by ex order by ex) as ...**
 
 **sum/max/avg() over(partition by ex order by ex) as ...**
 
