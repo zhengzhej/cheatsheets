@@ -1,5 +1,13 @@
 ## Cheatsheet
 
+### [order by specific field values](https://github.com/waqar3/CodeSignal-Databases/blob/86ed893c93dccd8f954f696978302acd4c56e51e/10-mischievousNephews/mischievousNephews.sql)
+```mysql
+select *
+from TABLE
+where expression
+order by column, field(column, name, name, name) desc
+```
+
 ### [Count()](https://www.cnblogs.com/zhuchenglin/p/12077989.html)
 count(expression) returns not null counts regardless of the expression, so it's used to count records or null rows
 sum(expression) returns valid row count
@@ -73,6 +81,10 @@ select
 from  Salaries
 ```
 
+### Limit and Offset
+```mysql
+select * from `members` limit 1, 2; # offset 1, limit 2
+```
 ## Cases
 **[sum() / case when / if](https://leetcode-cn.com/problems/capital-gainloss/)**
 ```mysql
