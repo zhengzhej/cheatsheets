@@ -79,7 +79,7 @@ ifnull(value, function)
 
 **lead/lag(ex, n) over(partition by ex order by ex) as ...**
 
-**sum/max/avg() over(partition by ex order by ex) as ...**
+**sum/max/avg/count() over(partition by ex order by ex) as ...**
 
 [case](https://leetcode-cn.com/problems/calculate-salaries/solution/xiao-bai-si-lu-zhi-jie-qiu-chu-lai-jiu-x-0xlg/)
 ```mysql
