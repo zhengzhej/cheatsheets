@@ -35,6 +35,7 @@ date(now()) # 2022-02-13
 date_format(now(), '%y-%m-%d') # 22-02-13
 datediff('2020-04-02','2010-04-04') # a - b, return -1
 timediff('2020-05-05 10:10:10','2020-05-05 10:10:00') # return 00:00:10
+between '2013-10-01' and '2013-10-03' # used in filtering
 
 day('2020-05-05') # 05
 month('2020-05-05') # 05
