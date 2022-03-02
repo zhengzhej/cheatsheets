@@ -79,7 +79,17 @@ ifnull(value, function)
 
 **lead/lag(ex, n) over(partition by ex order by ex) as ...**
 
-**sum/max/avg/count() over(partition by ex order by ex) as ...**
+**sum/max/avg/count(ex) over(partition by ex order by ex rows between n preceding and current row) as ...**
+```mysql
+# moving average with window function
+SELECT *,
+      avg(confirmed_day) OVER(
+          PARTITION BY country
+          ORDER BY date
+          ROWS BETWEEN 6 PRECEDING AND CURRENT ROW)
+          AS 7day_moving_average
+FROM confirmed_covid;
+```
 
 [case](https://leetcode-cn.com/problems/calculate-salaries/solution/xiao-bai-si-lu-zhi-jie-qiu-chu-lai-jiu-x-0xlg/)
 ```mysql
