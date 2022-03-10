@@ -77,7 +77,7 @@ ifnull(value, function)
 
 **rank/dense_rank/row() over(partition by ex order by ex) as ...**
 
-**lead/lag(ex, n) over(partition by ex order by ex) as ...**
+**lead/lag(ex, n, default) over(partition by ex order by ex) as ...**
 
 **sum/max/avg/count(ex) over(partition by ex order by ex rows between n preceding and current row) as ...**
 ```mysql
