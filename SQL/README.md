@@ -74,12 +74,22 @@ ifnull(value, function)
 ```
 
 ### Window Function
+[Optimization of Analytic Window Functions](https://ericfu.me/sql-window-function/)
+```mysql
+/*syntax*/
+WINDOW_FUNCTION (expression) OVER (
+    [PARTITION BY part_list],
+    [ORDER BY order_list],
+    [{ ROWS | RANGE} BETWEEN frame_start AND frame_end]
+)
+```
+```mysql
+rank/dense_rank/row() over(partition by ex order by ex) as ...
 
-**rank/dense_rank/row() over(partition by ex order by ex) as ...**
+lead/lag(ex, n, default) over(partition by ex order by ex) as ...
 
-**lead/lag(ex, n, default) over(partition by ex order by ex) as ...**
-
-**sum/max/avg/count(ex) over(partition by ex order by ex rows between n preceding and current row) as ...**
+sum/max/avg/count(ex) over(partition by ex order by ex rows between n preceding and current row) as ...
+```
 ```mysql
 # moving average with window function
 SELECT *,
