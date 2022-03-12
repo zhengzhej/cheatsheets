@@ -83,12 +83,14 @@ WINDOW_FUNCTION (expression) OVER (
     [{ ROWS | RANGE} BETWEEN frame_start AND frame_end]
 )
 ```
+window >> order >> frame for each row >> function
 ```mysql
-rank/dense_rank/row() over(partition by ex order by ex) as ...
-
-lead/lag(ex, n, default) over(partition by ex order by ex) as ...
-
+# Aggregate
 sum/max/avg/count(ex) over(partition by ex order by ex rows between n preceding and current row) as ...
+# Ranking
+rank/dense_rank/row() over(partition by ex order by ex) as ...
+# Value
+lead/lag/first_value/last_value(ex, n, default) over(partition by ex order by ex) as ...
 ```
 ```mysql
 # moving average with window function
