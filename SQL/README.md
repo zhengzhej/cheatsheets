@@ -33,7 +33,8 @@ ORDER BY c.customer_id
 now() # 2022-02-13 13:34:35
 date(now()) # 2022-02-13
 date_format(now(), '%y-%m-%d') # 22-02-13
-datediff('2020-04-02','2010-04-04') # a - b, return -1
+datediff('2020-04-02','2020-04-04') # a - b, return -2
+to_days('2020-04-04') - to_days('2020-04-02') # return 2
 timediff('2020-05-05 10:10:10','2020-05-05 10:10:00') # return 00:00:10
 between '2013-10-01' and '2013-10-03' # used in filtering
 
@@ -182,4 +183,36 @@ select
     /*name*/
     (select name from Hackers where Hackers.hacker_id = h)
 from (select distinct submission_date from Submissions) as s1;
+```
+
+### Consecutive Numbers
+[Case: LC180. Consecutive Numbers](https://leetcode-cn.com/problems/consecutive-numbers/)
+- for n<=3: self-join with id/row_num; lead() + lag()
+- solution: row_number() over() - row_number() over(partition by num) as sub; select count(num) .. groupby num, sub
+```mysql
+SELECT DISTINCT Num ConsecutiveNums
+FROM(
+SELECT *,
+      ROW_NUMBER() OVER (PARTITION BY Num ORDER BY Id) rownum
+FROM LOGS
+) t
+GROUP BY (Id+1-rownum),Num 
+HAVING COUNT(*)>=3
+
+作者：pipideveloper
+链接：https://leetcode-cn.com/problems/consecutive-numbers/solution/mysql-jie-fa-tong-jie-ren-yi-lian-xu-nwe-hxg4/
+来源：力扣（LeetCode）
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+```
+- easy way: set variables
+```mysql
+select distinct num
+from (
+    select
+        num,
+        if(num=@curr, @count := @count + 1, @count := 1) as ConNum,
+        @curr:=num
+    from Logs as l, (select @curr:= null, @count:=1) as v
+) as t
+where ConNum >=3;
 ```
