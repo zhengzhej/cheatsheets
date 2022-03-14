@@ -119,7 +119,7 @@ from  Salaries
 select * from `members` limit 1, 2; # offset 1, limit 2
 ```
 ## Cases
-**[sum() / case when / if](https://leetcode-cn.com/problems/capital-gainloss/)**
+### [sum() / case when / if](https://leetcode-cn.com/problems/capital-gainloss/)
 ```mysql
 select 
   stock_name, 
@@ -135,7 +135,7 @@ select
 from Stocks 
 group by stock_name
 ```
-[dancing competition](https://wachino.github.io/codefights/codefights-arcade/codefights-arcade-databases/63_dancingCompetition/README.html)
+### [dancing competition](https://wachino.github.io/codefights/codefights-arcade/codefights-arcade-databases/63_dancingCompetition/README.html)
 ```mysql
 SELECT arbiter_id, first_criterion, second_criterion, third_criterion
 FROM scores, (
@@ -150,4 +150,36 @@ FROM scores, (
 WHERE (IF(first_criterion = max1 OR first_criterion = min1, 1, 0) + 
     IF(second_criterion = max2 OR second_criterion = min2, 1, 0) + 
     IF(third_criterion = max3 OR third_criterion = min3, 1, 0)) < 2;
+```
+### Correlated Subquery
+[About Correlated Subquery](https://ericfu.me/subquery-optimization/)
+
+[Case: 15 Days of Learning SQL](https://www.hackerrank.com/challenges/15-days-of-learning-sql/problem)
+
+**Date**-**Summary** Subquery based on Date-**ID** Subquery based on Date-**Name** Subquery based on ID
+```mysql
+select
+    /*date*/
+    s1.submission_date, 
+    /*summary*/
+    (select count(distinct s3.hacker_id)
+     from Submissions s3
+     where s3.submission_date = s1.submission_date and 
+        datediff(s1.submission_date, '2016-03-01') = (
+            select count(distinct s4.submission_date)
+            from Submissions s4
+            where s4.hacker_id = s3.hacker_id and s4.submission_date < s3.submission_date
+        )
+    ),
+    /*id*/
+    (select hacker_id
+     from Submissions s2
+     where s2.submission_date = s1.submission_date
+     group by hacker_id
+     order by count(hacker_id) desc, hacker_id
+     limit 1
+    ) as h,
+    /*name*/
+    (select name from Hackers where Hackers.hacker_id = h)
+from (select distinct submission_date from Submissions) as s1;
 ```
