@@ -83,6 +83,13 @@ WINDOW_FUNCTION (expression) OVER (
     [ORDER BY order_list],
     [{ ROWS | RANGE} BETWEEN frame_start AND frame_end]
 )
+/*
+CURRENT ROW
+  | UNBOUNDED PRECEDING
+  | UNBOUNDED FOLLOWING
+  | expr PRECEDING
+  | expr FOLLOWING
+*/
 ```
 window >> order >> frame for each row >> function
 ```mysql
